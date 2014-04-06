@@ -675,13 +675,13 @@ abstract class test_setup {
         $cms = $DB->get_records_sql('
             SELECT
                 cm.id           AS cmid,
-                table.name        AS name,
-                table.id          AS id,
+                thistable.name        AS name,
+                thistable.id          AS id,
                 course.fullname AS course_name,
                 course.id       AS course_id
             FROM {course_modules} AS cm
-            JOIN {' . $this->get_table_name() . '} table
-            ON table.id = cm.instance
+            JOIN {' . $this->get_table_name() . '} thistable
+            ON thistable.id = cm.instance
             JOIN {course} course
             ON course.id = cm.course
             JOIN {modules} modules

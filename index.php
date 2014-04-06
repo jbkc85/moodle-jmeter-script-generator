@@ -671,16 +671,17 @@ abstract class test_setup {
     public function get_cms($course) {
         global $DB;
 
+        // For some reason the basic get_table_name didnt work.  Adjusted to use a 'table' name
         $cms = $DB->get_records_sql('
             SELECT
                 cm.id           AS cmid,
-                {' . $this->get_table_name() . '}.name        AS name,
-                {' . $this->get_table_name() . '}.id          AS id,
+                table.name        AS name,
+                table.id          AS id,
                 course.fullname AS course_name,
                 course.id       AS course_id
             FROM {course_modules} AS cm
-            JOIN {' . $this->get_table_name() . '}
-            ON {' . $this->get_table_name() . '}.id = cm.instance
+            JOIN {' . $this->get_table_name() . '} table
+            ON table.id = cm.instance
             JOIN {course} course
             ON course.id = cm.course
             JOIN {modules} modules

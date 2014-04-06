@@ -273,7 +273,10 @@ function quiz_check_for_unsupported_questions($questions) {
 function question_type_is_info($question) {
     if($question->qtype == 'description') {
         return true;
+    } else if($question->qtype == 'random') {
+        return true;
     }
+    error_log("Unsupported Question Type (qtype): {$question->qtype}");
     return false;
 }
 
